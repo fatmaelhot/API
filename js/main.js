@@ -28,18 +28,18 @@ const monthNames = [
 
 function getData(country) {
   
-  const xhttp = new XMLHttpRequest();
+  const myHttp = new XMLHttpRequest();
 
  
-  xhttp.open(
+  myHttp.open(
     "GET",
     `https://api.weatherapi.com/v1/forecast.json?key=69542678953342a486381800230108&q=${country}&days=3`
   );
-  xhttp.send();
+  myHttp.send();
 
-  xhttp.addEventListener("readystatechange", () => {
-    if (xhttp.readyState == 4 && xhttp.status == 200) {
-      const response = JSON.parse(xhttp.response);
+  myHttp.addEventListener("readystatechange", () => {
+    if (myHttp.readyState == 4 && myHttp.status == 200) {
+      const response = JSON.parse(myHttp.response);
       console.log(response)
       currentDay(response.current, response.location);
       futureDay(response.forecast);
@@ -51,7 +51,7 @@ function currentDay(current, location) {
   row.innerHTML = `<div class="col-xl-4 col-md-6">
           <div class="card bg-black bg-opacity-75 text-white shadow border-0 p-1">
             <div class="card-body">
-              <h6 class="card-subtitle mb-2 d-flex justify-content-between text-info"><span>${
+              <h6 class="card-subtitle mb-2 d-flex justify-content-between text-info fs-3"><span>${
                 dayNames[new Date().getDay(location.localtime)]
               }</span><span>${new Date().getDate(location.localtime)} ${
     monthNames[new Date().getMonth(location.localtime)]
@@ -63,7 +63,7 @@ function currentDay(current, location) {
                 <p class="card-text fs-1 fw-bold">${
                   current.temp_c
                 }<sup>o</sup>C</p>
-                <img src="${current.condition.icon}" alt="" width="90">
+                
               </div>
               <p class="state mb-4">${current.condition.text}</p>
               <div class="d-flex justify-content-between align-items-center">
@@ -84,10 +84,10 @@ function futureDay(future) {
     row.innerHTML += `<div class="col-xl-4 col-md-6 text-center">
             <div class="card h-100 bg-black bg-opacity-75 text-white shadow border-0 p-2">
                 <div class="card-body">
-                    <h6 class="card-subtitle text-info">${
+                    <h6 class="card-subtitle text-info fs-2">${
                       dayNames[new Date(future.forecastday[i].date).getDay()]
                     }</h6>
-                    <div class="d-flex justify-content-between mt-5 align-items-center">
+                    <div class="d-flex justify-content-center mt-3 align-items-center">
                         <div>
                             <p class="card-text fs-4 fw-bold">${
                               future.forecastday[i].day.maxtemp_c
@@ -96,9 +96,7 @@ function futureDay(future) {
                               future.forecastday[i].day.mintemp_c
                             }<sup>o</sup></p>
                         </div>
-                        <img src="${
-                          future.forecastday[i].day.condition.icon
-                        }" alt="" width="70">
+                        
                     </div>
                     <p class="state mt-4">${
                       future.forecastday[i].day.condition.text

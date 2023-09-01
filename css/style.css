@@ -1,7 +1,7 @@
 .form-control:focus {
     border: none;
-    box-shadow: 0 0 0 0.2rem rgb(15, 65, 75);
+    box-shadow: 0 0 0 0.2rem rgb(119, 147, 152);
 }
 body{
-    background-color: rgb(22, 22, 94) !important;
+    background-color: rgb(60, 60, 171) !important;
 }
